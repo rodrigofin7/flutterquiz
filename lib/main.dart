@@ -2,9 +2,17 @@ import 'package:flutter/material.dart';
 
 void main() => runApp(MyApp());
 
-class MyApp extends StatelessWidget
+class MyApp extends StatefulWidget
 {
-        var question = [
+        @override
+        State<StatefulWidget> createState() {
+          // TODO: implement createState
+          return MyAppState();
+        }
+         
+}
+  class  MyAppState extends State<MyApp> {
+         var question = [
           'What\'s your favorite color?',
           'What\'s your favorite animal?',
           'What\'s your favorite B?',
@@ -14,9 +22,8 @@ class MyApp extends StatelessWidget
     
     void answerQuestion()
     {
-      print('Answer 1 Chossen');
-      
-      if(numberquestion == (question.length - 1))
+      setState(() {
+        if(numberquestion == (question.length - 1))
         {
             numberquestion = 0; 
         }
@@ -24,9 +31,13 @@ class MyApp extends StatelessWidget
         {
             numberquestion++;
         } 
+      });
+      print('Answer 1 Chossen');
+      
+      
     }
 
-    MyApp()
+    MyAppState()
     {
         numberquestion = 0;
     }
