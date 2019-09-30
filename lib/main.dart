@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_quizapp/result.dart';
 import './question.dart';
+import './answer.dart';
+import './quiz.dart';
 
 void main() => runApp(MyApp());
 
@@ -12,13 +15,21 @@ class MyApp extends StatefulWidget {
 }
 
 class MyAppState extends State<MyApp> {
-  var question = [
-    'What\'s your favorite color?',
-    'What\'s your favorite animal?',
-    'What\'s your favorite B?',
-    'What\'s your favorite D?',
-    'What\'s your favorite E?'
-  ];
+  // var question = [
+  //   'What\'s your favorite color?',
+  //   'What\'s your favorite animal?',
+  //   'What\'s your favorite B?',
+  //   'What\'s your favorite D?',
+  //   'What\'s your favorite E?'
+  // ];
+
+  var question = [{'questionText':'whats your favorite A','answer':['CorrectA','NoCorrectA1','NoCorrectA2','NoCorrectA3','NoCorrectA4']},
+                  {'questionText':'whats your favorite B','answer':['CorrectB','NoCorrectB1','NoCorrectB2','NoCorrectB3','NoCorrectB4']},
+                  {'questionText':'whats your favorite C','answer':['CorrectC','NoCorrectC1','NoCorrectC2','NoCorrectC3','NoCorrectC4']},
+                  {'questionText':'whats your favorite D','answer':['CorrectD','NoCorrectD1','NoCorrectD2','NoCorrectD3','NoCorrectD4']},
+                  {'questionText':'whats your favorite E','answer':['CorrectE','NoCorrectE1','NoCorrectE2','NoCorrectE3','NoCorrectE4']},
+                  {'questionText':'whats your favorite F','answer':['CorrectF','NoCorrectF1','NoCorrectF2','NoCorrectF3','NoCorrectF4']}];
+  
   int numberquestion;
 
   void answerQuestion() {
@@ -32,6 +43,13 @@ class MyAppState extends State<MyApp> {
     print('Answer 1 Chossen');
   }
 
+  void resetQuiz() {
+setState(() {
+ numberquestion = 0; 
+});
+
+  }
+
   MyAppState() {
     numberquestion = 0;
   }
@@ -43,15 +61,10 @@ class MyAppState extends State<MyApp> {
         appBar: AppBar(
           title: Text('My First App'),
         ),
-        body: Column(
-          children: [
-            Question(question.elementAt(numberquestion)),
-            RaisedButton(child: Text('Answer 1'), onPressed: answerQuestion),
-            RaisedButton(child: Text('Answer 2'), onPressed: answerQuestion),
-            RaisedButton(child: Text('Answer 3'), onPressed: answerQuestion),
-          ],
-        ),
-      ),
-    );
+        body:
+         numberquestion  < (question.length - 1) ?
+          Quiz( question:question, numberquestion: numberquestion, answerQuestion: answerQuestion)
+           : Result(resetfunc: resetQuiz ,) ,) ,
+      );
   }
 }
